@@ -51,7 +51,7 @@ RUN mkdir -p ~/catkin_ws/src \
     
 # Extract files from zip to workspace
 #ADD drone_toolbox-master.tar.gz ~/catkin_ws/src
-ADD drone_toolbox-simplesim_controller_gazebo.zip /root/catkin_ws/src
+ADD drone_toolbox-simplesim_controller_lab.zip /root/catkin_ws/src
 ADD mocap_optitrack-dcsc_pose_stamped.zip /root/catkin_ws/src
 
 #RUN apt-get update \
@@ -62,8 +62,8 @@ ADD mocap_optitrack-dcsc_pose_stamped.zip /root/catkin_ws/src
 #RUN pip install casadi
 
 RUN cd ~/catkin_ws/src \
-    && unzip drone_toolbox-simplesim_controller_gazebo.zip \
-    && rm drone_toolbox-simplesim_controller_gazebo.zip \
+    && unzip drone_toolbox-simplesim_controller_lab.zip \
+    && rm drone_toolbox-simplesim_controller_lab.zip \
     && unzip mocap_optitrack-dcsc_pose_stamped.zip \
     && rm mocap_optitrack-dcsc_pose_stamped.zip \
     && git clone https://github.com/cor-drone-dev/mavros.git \
@@ -85,12 +85,6 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
 RUN echo 'source /opt/ros/${ROS_DISTRO}/setup.bash && \
           source ~/catkin_ws/devel/setup.bash' \
         >> ~/.bashrc
-
-RUN pip3 install casadi \
-    && pip3 install scipy \
-    && pip3 install python_tsp \
-    && pip3 install gpytorch \
-    && pip3 install tqdm
 
 # End with a terminal in the container and running the script to source environments
 #ENTRYPOINT ["~/ros_entrypoint.sh"]
